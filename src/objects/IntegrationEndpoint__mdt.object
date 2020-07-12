@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used to configure integrations</description>
+    <fields>
+        <fullName>EndpointAddress__c</fullName>
+        <description>Address of the integration endpoint</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Endpoint Address</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Checkbox turning the integration on/off</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>IsActive</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsLogActive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox indicating whether an integration log will be saved for the integration.</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>IsLogActive</label>
+        <type>Checkbox</type>
+    </fields>
+    <label>Integration Endpoint</label>
+    <pluralLabel>Integration Endpoints</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
