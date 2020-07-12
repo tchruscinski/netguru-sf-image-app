@@ -33,6 +33,13 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
+            <componentName>searchImages</componentName>
+        </componentInstances>
+        <name>bottomLeft</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
             <componentInstanceProperties>
                 <name>enableInlineEdit</name>
                 <value>true</value>
@@ -58,13 +65,6 @@
                 <value>3</value>
             </componentInstanceProperties>
             <componentName>flexipage:filterListCard</componentName>
-        </componentInstances>
-        <name>bottomLeft</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
-            <componentName>searchImages</componentName>
         </componentInstances>
         <name>bottomRight</name>
         <type>Region</type>

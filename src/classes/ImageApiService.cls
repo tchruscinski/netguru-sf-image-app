@@ -116,6 +116,7 @@ public class ImageApiService {
         Boolean isError = false;
         for(Integer i = 0; i < deleteResults.size(); i++) {
             if (!deleteResults[i].isSuccess()) {
+                isError = true;
                 for (Database.Error er : deleteResults[i].getErrors()) {
                     errorMessage += er.getStatusCode() + ': ' + er.getMessage() + '\n';
                 }
@@ -124,7 +125,7 @@ public class ImageApiService {
 
         if(isError) {
             insert new ErrorLog__c(
-                ErrorCode__c = Constants.ERROR_LOG_IMAGE_API_UPSERT_CODE,
+                ErrorCode__c = Constants.ERROR_LOG_IMAGE_API_DELETE_CODE,
                 ErrorMessage__c = errorMessage
             );
         }

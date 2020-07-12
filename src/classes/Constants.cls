@@ -7,4 +7,7 @@ public class Constants {
     public static final Integer API_BAD_REQUEST_CODE = 400;
     public static final Integer TEXT_AREA_LONG_SIZE = 131072;
     public static final String ERROR_LOG_IMAGE_API_UPSERT_CODE = 'Image API records upsert error';
+    public static final String ERROR_LOG_IMAGE_API_DELETE_CODE = 'Error in deleting images';
+    public static final String ERROR_LOG_EMAIL_SERVICE_ERROR = 'Error sending images by email';
+    public static final String IMAGES_EMAIL_SUBJECT = 'Filtered Images';
 }
