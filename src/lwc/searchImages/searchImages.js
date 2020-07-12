@@ -28,8 +28,6 @@ export default class searchImages extends LightningElement {
     @track errorMsg = ' ';
     imageTitle = '';
     email = '';
-    isEmailSent = false;
-
 
     handleTitleChange(event) {
         this.imageTitle = event.detail.value;
@@ -64,7 +62,6 @@ export default class searchImages extends LightningElement {
     handleSendEmail() {
         if(this.email) {
             let rows = this.template.querySelector('lightning-datatable').getSelectedRows();
-            this.isEmailSent = true;
             sendEmail({emailAddress: this.email, images: rows})
                 .then().catch(error => {
                     if(error) {
