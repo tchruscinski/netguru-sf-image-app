@@ -29,6 +29,7 @@
     </profileActionOverrides>
     <tabs>Image__c</tabs>
     <tabs>IntegrationLog__c</tabs>
+    <tabs>ErrorLog__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Images_UtilityBar</utilityBar>
 </CustomApplication>
