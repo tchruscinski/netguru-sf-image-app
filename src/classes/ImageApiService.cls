@@ -79,7 +79,7 @@ public class ImageApiService {
         }
 
         Schema.SObjectField imageId = Image__c.Fields.ImageApiId__c;
-        Database.UpsertResult [] upsertResults = Database.upsert(imagesToUpsert, imageId,false);
+        Database.UpsertResult [] upsertResults = Database.upsert(imagesToUpsert, imageId, false);
         String errorMessage = '';
         Boolean isError = false;
         for(Integer i = 0; i < upsertResults.size(); i++) {
