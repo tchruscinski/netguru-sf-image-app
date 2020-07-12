@@ -63,9 +63,10 @@ public class ImageApiService {
             imagesJson, List<ImageApiJsonParser>.class
         );
 
-        List<Image__c> imagesToInsert = new List<Image__c>();
+        List<Image__c> imagesToUpsert = new List<Image__c>();
+        Set<String> incomingImageIds = new Set<String>();
         for(ImageApiJsonParser imageParser : parsedImages) {
-            imagesToInsert.add(
+            imagesToUpsert.add(
                 new Image__c(
                     ImageApiId__c = imageParser.id,
                     AlbumId__c = imageParser.albumId,
@@ -74,8 +75,58 @@ public class ImageApiService {
                     ThumbnailUrl__c = imageParser.thumbnailUrl
                 )
             );
+            incomingImageIds.add(imageParser.id);
         }
-        insert imagesToInsert;
-        //add database.upsert here and error handling
+
+        Schema.SObjectField imageId = Image__c.Fields.ImageApiId__c;
+        Database.UpsertResult [] upsertResults = Database.upsert(imagesToUpsert, imageId,false);
+        String errorMessage = '';
+        Boolean isError = false;
+        for(Integer i = 0; i < upsertResults.size(); i++) {
+            if (!upsertResults[i].isSuccess()) {
+                isError = true;
+                for (Database.Error er : upsertResults[i].getErrors()) {
+                    errorMessage += er.getStatusCode() + ': ' + er.getMessage() + '\n';
+                }
+            }
+        }
+
+        if(isError) {
+            insert new ErrorLog__c(
+                ErrorCode__c = Constants.ERROR_LOG_IMAGE_API_UPSERT_CODE,
+                ErrorMessage__c = errorMessage
+            );
+        }
+        deleteImages(incomingImageIds);
+    }
+
+    /**
+    *  IMPORTANT: Because no specification was provided I assume that the Image Id in the API (set as External Id in Salesforce)
+    *  is the identifier which should be used to delete the photos in Salesforce when they disappear
+    */
+    private static void deleteImages(Set<String> imageIds) {
+        List<Image__c> imagesToDelete = [
+            SELECT Id
+            FROM Image__c
+            WHERE ImageApiId__c NOT IN :imageIds
+        ];
+
+        Database.DeleteResult [] deleteResults = Database.delete(imagesToDelete, false);
+        String errorMessage = '';
+        Boolean isError = false;
+        for(Integer i = 0; i < deleteResults.size(); i++) {
+            if (!deleteResults[i].isSuccess()) {
+                for (Database.Error er : deleteResults[i].getErrors()) {
+                    errorMessage += er.getStatusCode() + ': ' + er.getMessage() + '\n';
+                }
+            }
+        }
+
+        if(isError) {
+            insert new ErrorLog__c(
+                ErrorCode__c = Constants.ERROR_LOG_IMAGE_API_UPSERT_CODE,
+                ErrorMessage__c = errorMessage
+            );
+        }
     }
 }

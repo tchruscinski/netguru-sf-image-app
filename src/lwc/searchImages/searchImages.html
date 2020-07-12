@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Search for images by title" icon-name="standard:custom46">
+        <div if:true={errorMsg} style="margin-left: 3%;">
+            <p style="color: red;">{errorMsg}</p>
+        </div>
+        <lightning-layout multiple-rows="true" vertical-align="end">
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="6" padding="around-small">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <lightning-input type="text"
+                                         label="Image Title"
+                                         onchange={handleTitleChange}></lightning-input>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="2" medium-device-size="2" large-device-size="2" padding="around-small">
+                <lightning-button label="Search"
+                                  variant="brand"
+                                  onclick={handleSearch}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout><br/>
+        <div if:true={fetchedData}>
+            <div style="height: 125px">
+                <lightning-datatable data={fetchedData}
+                                     columns={columns}
+                                     key-field="id"></lightning-datatable>
+            </div>
+        </div>
+    </lightning-card>
+
+</template>

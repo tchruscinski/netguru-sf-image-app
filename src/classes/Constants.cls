@@ -6,4 +6,5 @@ public class Constants {
     public static final Integer API_SUCCESS_CODE = 200;
     public static final Integer API_BAD_REQUEST_CODE = 400;
     public static final Integer TEXT_AREA_LONG_SIZE = 131072;
+    public static final String ERROR_LOG_IMAGE_API_UPSERT_CODE = 'Image API records upsert error';
 }
